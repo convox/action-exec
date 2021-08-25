@@ -14,9 +14,6 @@ inputs:
   command:
     description: The command to be run
     required: true
-  release:
-    description: ID of the release to run the command against. Only needed if you have not run a build step first or you wish to override the release id from the build step
-    required: false
 runs:
   using: docker
   image: Dockerfile

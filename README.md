@@ -1,5 +1,5 @@
 # Convox Exec Action
-This Action runs a [One-off Command](https://docs.convox.com/management/one-off-commands) using a specific release of an app on Convox. A typical use case of this action would be to run migrations or a similar pre-deploy or post-deploy command.
+This Action runs a [One-off Command](https://docs.convox.com/management/one-off-commands) in a running process. A typical use case of this action would be to run migrations or a similar pre-deploy or post-deploy command.
 
 ## Inputs
 ### `rack`
@@ -10,8 +10,7 @@ This Action runs a [One-off Command](https://docs.convox.com/management/one-off-
 **Required** The name of the [service](https://docs.convox.com/application/services) to run the command against
 ### `command`
 **Required** The command you wish to run
-### `release`
-**Optional** The ID of the [release](https://docs.convox.com/deployment/releases) you wish to run the command against. If you have run a Build action as a previous step your command will run using the release created by that build step by default. You only need to set the release if you have not run a build step first or you wish to override the release id from the build step. If you dont add any release it will run against the latest one.
+
 ## Example usage
 ```
 steps:
@@ -20,12 +19,14 @@ steps:
   uses: convox/action-login@v2
   with:
     password: ${{ secrets.CONVOX_DEPLOY_KEY }}
+
 - name: build
   id: build
   uses: convox/action-build@v1
   with:
     rack: staging
     app: myapp
+
 - name: migrate
   id: migrate
   uses: convox/action-exec@v1
@@ -34,12 +35,11 @@ steps:
     app: myapp
     service: web
     command: 'rails db:migrate'
-    release: ${{ steps.build.outputs.release }}
+
 - name: promote
   id: promote
   uses: convox/action-promote@v1
   with:
     rack: staging
     app: myapp
-    release: ${{ steps.build.outputs.release }}
 ```
