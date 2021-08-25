@@ -1,4 +1,4 @@
-name: Convox Run
+name: Convox Exec
 description: Run a command
 author: Convox
 inputs:

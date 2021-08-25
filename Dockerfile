@@ -1,11 +1,11 @@
 FROM ubuntu:18.04
 
 LABEL version="1.0.0"
-LABEL repository="https://github.com/convox/actions-run"
+LABEL repository="https://github.com/convox/actions-exec"
 LABEL homepage="https://convox.com/convox"
 LABEL maintainer="Convox <support@convox.com>"
 
-LABEL "com.github.actions.name"="Convox Run"
+LABEL "com.github.actions.name"="Convox Exec"
 LABEL "com.github.actions.description"="Run a command"
 LABEL "com.github.actions.icon"="cloud"
 LABEL "com.github.actions.color"="blue"

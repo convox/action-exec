@@ -1,4 +1,4 @@
-# Convox Run Action
+# Convox Exec Action
 This Action runs a [One-off Command](https://docs.convox.com/management/one-off-commands) using a specific release of an app on Convox. A typical use case of this action would be to run migrations or a similar pre-deploy or post-deploy command.
 
 ## Inputs
