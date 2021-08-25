@@ -28,7 +28,7 @@ steps:
     app: myapp
 - name: migrate
   id: migrate
-  uses: convox/action-run@v1
+  uses: convox/action-exec@v1
   with:
     rack: staging
     app: myapp
