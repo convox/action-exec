@@ -1,4 +1,23 @@
 #!/bin/sh
+set -e
+
+if [ -z "${INPUT_RACK:-}" ]; then
+  echo "::error::Required input 'rack' is missing"
+  exit 1
+fi
+if [ -z "${INPUT_APP:-}" ]; then
+  echo "::error::Required input 'app' is missing"
+  exit 1
+fi
+if [ -z "${INPUT_SERVICE:-}" ]; then
+  echo "::error::Required input 'service' is missing"
+  exit 1
+fi
+if [ -z "${INPUT_COMMAND:-}" ]; then
+  echo "::error::Required input 'command' is missing"
+  exit 1
+fi
+
 export CONVOX_RACK=$INPUT_RACK
 
 echo "Running command on the application."
