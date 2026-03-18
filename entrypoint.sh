@@ -18,11 +18,13 @@ if [ -z "${INPUT_COMMAND:-}" ]; then
   exit 1
 fi
 
-export CONVOX_RACK=$INPUT_RACK
+export CONVOX_RACK="$INPUT_RACK"
 
 echo "Running command on the application."
 
 CONVOX_ARGS="--app $INPUT_APP --rack $INPUT_RACK"
+# Note: CONVOX_ARGS is expanded inside a script -c string below where it is
+# re-parsed by /bin/sh, so inner quoting is intentionally omitted here.
 
 # Use 'script' to allocate a pseudo-TTY. GitHub Actions runners provide a
 # non-interactive terminal, which causes convox exec to disable TTY mode.
