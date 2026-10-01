@@ -1,5 +1,5 @@
 # Convox Exec Action
-This Action runs a [One-off Command](https://docs.convox.com/management/one-off-commands) in a running process. A typical use case of this action would be to run migrations or a similar pre-deploy or post-deploy command.
+This Action runs a [One-off Command](https://docs.convox.com/management/one-off-commands) in a running process. The command runs in the code of the release that is currently promoted, which makes this action a fit for post-deploy commands. To run a command such as a migration against a new release before promoting it, use [Run](https://github.com/convox/action-run) with its `release` input.
 
 > **Note:** This action automatically allocates a pseudo-TTY for proper output streaming and color support in GitHub Actions runners.
 
@@ -22,26 +22,22 @@ steps:
   with:
     password: ${{ secrets.CONVOX_DEPLOY_KEY }}
 
-- name: build
-  id: build
-  uses: convox/action-build@v1
+- name: deploy
+  id: deploy
+  uses: convox/action-deploy@v2
   with:
     rack: staging
     app: myapp
 
-- name: migrate
-  id: migrate
+- name: clear cache
+  id: clear-cache
   uses: convox/action-exec@v1
   with:
     rack: staging
     app: myapp
     service: web
-    command: 'rails db:migrate'
-
-- name: promote
-  id: promote
-  uses: convox/action-promote@v1
-  with:
-    rack: staging
-    app: myapp
+    command: 'rails tmp:cache:clear'
 ```
+
+## Convox CLI version
+This action installs the latest Convox CLI release when its image is built, so the action's version tag does not pin the CLI. On GitHub-hosted runners that happens on every run. On a self-hosted runner with a persistent Docker daemon, the CLI stays at the version cached in that daemon until its build cache is pruned.
