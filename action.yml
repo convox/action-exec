@@ -1,5 +1,5 @@
 name: Convox Exec
-description: Run a command
+description: Run a command in a running process
 author: Convox
 branding:
   icon: terminal
